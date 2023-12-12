@@ -1,3 +1,4 @@
+git pull --all --force
 git add .
 git commit -m "ja"
 git push --all --force
