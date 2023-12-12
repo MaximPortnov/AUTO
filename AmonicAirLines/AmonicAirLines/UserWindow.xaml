@@ -1,0 +1,27 @@
+﻿<Window x:Class="AmonicAirLines.UserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AmonicAirLines"
+        mc:Ignorable="d"
+        Title="AMONIC Airlines" Height="450" Width="800">
+
+    <Grid>
+        <Menu>
+            <MenuItem Header="Exit" Click="Exit_Click"></MenuItem>
+        </Menu>
+        <TextBlock x:Name="TimeSpentTextBlock" Text="Время в системе: 00:00:00" Margin="20,20,0,0" />
+        <TextBlock Name="NumberCrashBlock" TextWrapping="Wrap" Text="Number of crashes:" Margin="20,50,0,0"/>
+
+        <DataGrid x:Name="ActivitiesGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,100,20,20" ColumnWidth="*">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Date"  Width="100" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Login Time"  Width="100" Binding="{Binding LoginTime}"/>
+                <DataGridTextColumn Header="Logout Time"  Width="105" Binding="{Binding LogoutTime}"/>
+                <DataGridTextColumn Header="Time spent on  system"  Width="*" Binding="{Binding TimeSpentOnSystem}"/>
+                <DataGridTextColumn Header="Unsuccessful logout reason"  Width="*" Binding="{Binding UnsuccessfulLogoutReason}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
