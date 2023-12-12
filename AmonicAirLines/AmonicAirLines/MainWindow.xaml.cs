@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Security.Cryptography;
 
 namespace AmonicAirLines
 {
@@ -43,9 +44,23 @@ namespace AmonicAirLines
                 return;
             }
 
-
             string responseBody = "False";
-            string apiUrl = $"http://localhost:5197/CheckUsers?login={username}&password={password}";
+
+            string hashedPassword = "";
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(password);
+                byte[] hash = md5.ComputeHash(bytes);
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    sb.Append(hash[i].ToString("x2"));
+                }
+                hashedPassword = sb.ToString();
+            }
+            Console.WriteLine(hashedPassword);
+
+            string apiUrl = $"http://localhost:5197/CheckUsers?login={username}&password={hashedPassword}";
             HttpClient client = new HttpClient();
             try
             {
