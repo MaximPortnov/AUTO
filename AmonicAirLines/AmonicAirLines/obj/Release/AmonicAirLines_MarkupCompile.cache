@@ -1,19 +1,19 @@
 ﻿AmonicAirLines
 
 
-winexe
+exe
 C#
 .cs
-C:\Users\Kyrich\Documents\Apps\AmonicAirLines\AmonicAirLines\obj\Release\
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Release\
 AmonicAirLines
 none
 false
 TRACE
-C:\Users\Kyrich\Documents\Apps\AmonicAirLines\AmonicAirLines\App.xaml
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\App.xaml
 3-86951587
 
 7-1699298191
-1461470492636
+146-37509124
 AdminWindow.xaml;MainWindow.xaml;UserWindow.xaml;
 
 False
