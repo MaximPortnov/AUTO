@@ -7,13 +7,35 @@
         mc:Ignorable="d"
         Closing="Window_Closing"
         Title="AMONIC Airlines" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="RowStyle" TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding LogoutTime}" Value="--">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding LogoutTime}" Value="{x:Null}">
+                    <Setter Property="Background" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
 
     <Grid>
 
 
-        <TextBlock x:Name="timeTextBlock" FontSize="14" Foreground="Black" TextWrapping="Wrap" Text="TextBlock" Margin="20,36,483,352"/>
+        <TextBlock x:Name="timeTextBlock" FontSize="14" Foreground="Black" TextWrapping="Wrap" Text="TextBlock" Margin="10,14,493,379"/>
+        <TextBlock x:Name="crashTextBlock" FontSize="14" Foreground="Black" TextWrapping="Wrap" Text="TextBlock" Margin="10,42,493,351"/>
         
-        <DataGrid x:Name="ActivitiesGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,100,20,20" ColumnWidth="*">
+        <DataGrid 
+            x:Name="ActivitiesGrid" 
+            AutoGenerateColumns="False" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch" 
+            Margin="20,100,20,20" 
+            ColumnWidth="*"
+            CanUserAddRows="False"
+            RowStyle="{StaticResource RowStyle}" 
+            >
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Date"  Width="100" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Login Time"  Width="100" Binding="{Binding LoginTime}"/>

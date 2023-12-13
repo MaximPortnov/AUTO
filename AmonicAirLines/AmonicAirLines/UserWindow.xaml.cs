@@ -17,6 +17,15 @@ using Path = System.IO.Path;
 
 namespace AmonicAirLines
 {
+    public class DataItem
+    {
+        public DateTime Date { get; set; }
+        public string LoginTime { get; set; }
+        public string LogoutTime { get; set; }
+        public string TimeSpentOnSystem { get; set; }
+        public string UnsuccessfulLogoutReason { get; set; }
+    }
+
     /// <summary>
     /// Логика взаимодействия для UserWindow.xaml
     /// </summary>
@@ -32,8 +41,20 @@ namespace AmonicAirLines
             timer.Tick += Timer_Tick;
             timer.Start();
             timeTextBlock.Text = "общее время в системе: 00:00:00";
-            timeTextBlock.Visibility = Visibility.Visible;
+            crashTextBlock.Text = AppControle.obj.getCountCrashes().ToString();
 
+
+            List<DataItem> dataItems = AppControle.obj.sessions
+                .Take(AppControle.obj.sessions.Count - 1)
+                .Select(session => new DataItem
+            {
+                Date = session.startTime.Date,
+                LoginTime = session.startTime.TimeOfDay != TimeSpan.Zero ? session.startTime.ToString("HH:mm:ss") : "--",
+                LogoutTime = session.endTime.TimeOfDay != TimeSpan.Zero ? session.endTime.ToString("HH:mm:ss") : "--",
+                TimeSpentOnSystem = session.totalTime.ToString(),
+                UnsuccessfulLogoutReason = session.crash ? session.crashDescription : string.Empty
+            }).ToList();
+            ActivitiesGrid.ItemsSource = dataItems;
         }
         public void Timer_Tick(object sender, EventArgs e)
         {
@@ -44,10 +65,7 @@ namespace AmonicAirLines
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
 
-
-            Window window = new MainWindow();
             this.Close();
-            window.Show();
             timer.Stop();
 
         }

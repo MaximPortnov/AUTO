@@ -29,7 +29,8 @@ namespace AmonicAirLines
 
         public MainWindow()
         {
-            InitializeComponent();}
+            InitializeComponent();
+        }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -138,6 +139,17 @@ namespace AmonicAirLines
             // Вызов метода при открытии окна
             Console.WriteLine("load");
             AppControle.loadObj();
+            //AppControle.obj.printSession();
+            if (AppControle.obj.lastSessionIsCrash())
+            {
+                CrashDialogWindow crashDialogWindow = new CrashDialogWindow();
+                crashDialogWindow.ShowDialog();
+                //MessageBoxResult res = MessageBox.Show("краш произошел из за системной ошибки?", "краш", MessageBoxButton.YesNo);
+                AppControle.obj.setReasonCrash(crashDialogWindow.Result == "System", crashDialogWindow.CrashDescription);
+
+
+            }
+            AppControle.obj.printSession();
 
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

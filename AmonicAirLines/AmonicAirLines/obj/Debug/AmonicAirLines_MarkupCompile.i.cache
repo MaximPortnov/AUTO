@@ -4,17 +4,17 @@
 exe
 C#
 .cs
-C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\
 AmonicAirLines
 none
 false
 DEBUG;TRACE
-C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\App.xaml
-453160885
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\App.xaml
+51589786558
 
-10-1607183740
-1482005031259
-AdminWindow.xaml;MainWindow.xaml;UserWindow.xaml;UserWindow1.xaml;
+11-585064901
+148-2046752719
+AdminWindow.xaml;CrashDialogWindow.xaml;MainWindow.xaml;UserWindow.xaml;UserWindow1.xaml;
 
 True
 
