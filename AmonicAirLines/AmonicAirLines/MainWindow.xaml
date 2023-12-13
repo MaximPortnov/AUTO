@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmonicAirLines"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Closing="Window_Closing"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TextBox Name ="Username"  HorizontalAlignment="Center" Margin="0,240,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="454" Height="26"/>

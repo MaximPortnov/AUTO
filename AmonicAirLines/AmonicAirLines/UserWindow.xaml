@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmonicAirLines"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="AMONIC Airlines" Height="450" Width="800">
 
     <Grid>
-        <Menu>
-            <MenuItem Header="Exit" Click="Exit_Click"></MenuItem>
-        </Menu>
-        <TextBlock x:Name="TimeSpentTextBlock" Text="Время в системе: 00:00:00" Margin="20,20,0,0" />
-        <TextBlock Name="NumberCrashBlock" TextWrapping="Wrap" Text="Number of crashes:" Margin="20,50,0,0"/>
 
+
+        <TextBlock x:Name="timeTextBlock" FontSize="14" Foreground="Black" TextWrapping="Wrap" Text="TextBlock" Margin="20,36,483,352"/>
+        
         <DataGrid x:Name="ActivitiesGrid" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20,100,20,20" ColumnWidth="*">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Date"  Width="100" Binding="{Binding Date}"/>
@@ -24,4 +23,4 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-</Window>
+</Window> 

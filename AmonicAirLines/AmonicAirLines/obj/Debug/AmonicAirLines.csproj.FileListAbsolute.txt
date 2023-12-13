@@ -217,3 +217,8 @@ C:\Users\Kyrich\Desktop\kakapi\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\Amon
 C:\Users\Kyrich\Desktop\kakapi\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.csproj.CopyComplete
 C:\Users\Kyrich\Desktop\kakapi\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.exe
 C:\Users\Kyrich\Desktop\kakapi\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.pdb
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\bin\Debug\FluentAssertions.dll
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\bin\Debug\FluentAssertions.pdb
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\bin\Debug\FluentAssertions.xml
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow1.g.cs
+C:\Users\Maxim\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow1.baml

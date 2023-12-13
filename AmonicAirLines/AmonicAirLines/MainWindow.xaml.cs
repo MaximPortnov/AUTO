@@ -87,7 +87,8 @@ namespace AmonicAirLines
                 }
                 Window window = new UserWindow();
                 this.Hide();
-                window.Show();
+                window.ShowDialog();
+                this.Show();
                 
             }
             if (responseBody == "admin")
@@ -100,6 +101,7 @@ namespace AmonicAirLines
                 Window window = new AdminWindow();
                 this.Hide();
                 window.Show();
+                this.Show();
                 
             }
             else if (responseBody == "block")
@@ -130,6 +132,19 @@ namespace AmonicAirLines
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Вызов метода при открытии окна
+            Console.WriteLine("load");
+            AppControle.loadObj();
+
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Вызов метода при закрытии окна
+            Console.WriteLine("cloas");
+            AppControle.saveObj();
         }
     }
 }
