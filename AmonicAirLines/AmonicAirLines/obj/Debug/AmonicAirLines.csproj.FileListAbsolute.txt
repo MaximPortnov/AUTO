@@ -285,14 +285,12 @@ C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AdminWindow.g.cs
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\MainWindow.g.cs
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow.g.cs
-C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow1.g.cs
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\App.g.cs
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines_MarkupCompile.cache
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines_MarkupCompile.lref
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AdminWindow.baml
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\MainWindow.baml
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow.baml
-C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\UserWindow1.baml
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.g.resources
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.Properties.Resources.resources
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.csproj.GenerateResource.cache
@@ -302,3 +300,9 @@ C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AmonicAirLines.pdb
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\CrashDialogWindow.g.cs
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\CrashDialogWindow.baml
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\bin\Debug\Newtonsoft.Json.dll
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\bin\Debug\Newtonsoft.Json.xml
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AddUser.g.cs
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\EditRole.g.cs
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\AddUser.baml
+C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\obj\Debug\EditRole.baml

@@ -5,8 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmonicAirLines"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="450" Width="800">
+        Title="AdminWindow" Height="500" Width="700">
+    <Window.Resources>
+        <Style x:Key="RowStyle" TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HiddenData}" Value="1">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding HiddenData}" Value="0">
+                    <Setter Property="Background" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Button Content="Add user" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="76,10,0,0" VerticalAlignment="Top" Width="43" Click="Button_Click_2"/>
+        <Label Content="Office:" HorizontalAlignment="Left" Margin="24,47,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Name="OfficeComboBox" Margin="73,49,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="OfficeComboBox_SelectionChanged"/>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Height="300" Margin="0,0,20,0" ColumnWidth="*" 
+            VerticalAlignment="Center" 
+            CanUserAddRows="False" HorizontalAlignment="Right" Width="660"
+            RowStyle="{StaticResource RowStyle}"
+                  >
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Name"  Width="70" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last name"  Width="100" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Age"  Width="50" Binding="{Binding Age}"/>
+                <DataGridTextColumn Header="User Role"  Width="150" Binding="{Binding UserRole}"/>
+                <DataGridTextColumn Header="Email Address"  Width="150" Binding="{Binding EmailAddress}"/>
+                <DataGridTextColumn Header="Office"  Width="100" Binding="{Binding Office}"/>
+                <DataGridTextColumn Header="HiddenColumn" Binding="{Binding HiddenData}" Visibility="Collapsed"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Change Role" HorizontalAlignment="Right" Margin="0,0,602,49" VerticalAlignment="Bottom" Width="78" Click="Button_Click_3"/>
+        <Button Content="Enable/Disable Login" HorizontalAlignment="Right" Margin="0,0,444,49" VerticalAlignment="Bottom" Width="147" Click="Button_Click_4"/>
+        <Button Content="Clear Office" HorizontalAlignment="Left" Margin="204,50,0,0" VerticalAlignment="Top" Click="Button_Click"/>
     </Grid>
 </Window>

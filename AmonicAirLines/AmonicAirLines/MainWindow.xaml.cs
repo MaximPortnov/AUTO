@@ -61,7 +61,8 @@ namespace AmonicAirLines
             }
             Console.WriteLine(hashedPassword);
 
-            string apiUrl = $"http://localhost:5197/CheckUsers?login={username}&password={hashedPassword}";
+            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/CheckUsers?login={username}&password={hashedPassword}";
+            
             HttpClient client = new HttpClient();
             try
             {
@@ -86,7 +87,7 @@ namespace AmonicAirLines
                 {
                     lockedUsers.Remove(username);
                 }
-                Window window = new UserWindow();
+                UserWindow window = new UserWindow();
                 this.Hide();
                 window.ShowDialog();
                 this.Show();
@@ -99,9 +100,9 @@ namespace AmonicAirLines
                 {
                     lockedUsers.Remove(username);
                 }
-                Window window = new AdminWindow();
+                AdminWindow window = new AdminWindow();
                 this.Hide();
-                window.Show();
+                window.ShowDialog();
                 this.Show();
                 
             }
@@ -157,6 +158,22 @@ namespace AmonicAirLines
             // Вызов метода при закрытии окна
             Console.WriteLine("cloas");
             AppControle.saveObj();
+        }
+
+        private void b1_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new AddUser();
+            Hide();
+            window.ShowDialog();
+            Show();
+        }
+
+        private void b2_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new EditRole();
+            Hide();
+            window.ShowDialog();
+            Show();
         }
     }
 }
