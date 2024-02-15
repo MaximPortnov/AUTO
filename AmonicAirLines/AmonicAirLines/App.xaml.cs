@@ -13,7 +13,7 @@ namespace AmonicAirLines
     /// </summary>
     public partial class App : Application
     {
-        static public string PORT = "44328";
+        static public string PORT = "7139";
         static public string PROTOCOL = "https";
 
     }

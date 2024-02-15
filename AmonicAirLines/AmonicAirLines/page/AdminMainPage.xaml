@@ -1,0 +1,63 @@
+﻿<Page x:Class="AmonicAirLines.page.AdminMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AmonicAirLines.page"
+      mc:Ignorable="d"
+      Background="White"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="AdminMainPage">
+    <Page.Resources>
+        <Style x:Key="RowStyle" TargetType="DataGridRow">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding HiddenData}" Value="1">
+                    <Setter Property="Background" Value="Red" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding HiddenData}" Value="0">
+                    <Setter Property="Background" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Menu Background="Transparent">
+            <MenuItem Header="_Add user" Click="AddUser_Click"/>
+            <MenuItem Header="Exit" Click="Exit_Click"/>
+        </Menu>
+        <Grid Margin="20, 30" VerticalAlignment="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Office:" />
+            <ComboBox Grid.Column="1" Margin="10,0,10,0" Name="OfficeComboBox" Width="120" SelectionChanged="OfficeComboBox_SelectionChanged"/>
+            <Button Grid.Column="2" x:Name="btnClearOffice" Content="Clear Office" Click="btnClearOffice_Click"/>
+        </Grid>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" Margin="20,70,20,50" ColumnWidth="*" 
+            CanUserAddRows="False" 
+            RowStyle="{StaticResource RowStyle}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Name"  Width="70" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Header="Last name"  Width="100" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Header="Age"  Width="50" Binding="{Binding Age}"/>
+                <DataGridTextColumn Header="User Role"  Width="150" Binding="{Binding UserRole}"/>
+                <DataGridTextColumn Header="Email Address"  Width="150" Binding="{Binding EmailAddress}"/>
+                <DataGridTextColumn Header="Office"  Width="100" Binding="{Binding Office}"/>
+                <DataGridTextColumn Header="HiddenColumn" Binding="{Binding HiddenData}" Visibility="Collapsed"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Height="25" VerticalAlignment="Bottom" Margin="20,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnChangeRole" Margin="0,0,10,0" Content="Change Role" Click="btnChangeRole_Click"/>
+            <Button Grid.Column="1" x:Name="btnEnDisLogin" Margin="10,0,0,0" Content="Enable/Disable Login" Click="btnEnDisLogin_Click"/>
+        </Grid>
+
+    </Grid>
+</Page>

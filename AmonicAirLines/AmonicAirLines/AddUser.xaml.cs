@@ -43,8 +43,22 @@ namespace AmonicAirLines
         private void Savebtn_Click(object sender, RoutedEventArgs e)
         {
             string emailAddress = Email.Text;
+            if (emailAddress == null || emailAddress.Length == 0)
+            {
+                MessageBox.Show("нет почты");
+                return;
+            }
             string firstName = FirstNameTextBox.Text;
+            if (firstName == null || firstName.Length == 0) {
+                MessageBox.Show("нет имени юзера");
+                return; 
+            }
             string lastName = LastNameTextBox.Text;
+            if (lastName == null || lastName.Length == 0)
+            {
+                MessageBox.Show("нет фамилии юзера");
+                return;
+            }
             int officeId = 0;
             if (OfficeComboBox.SelectedItem != null)
             {
@@ -53,6 +67,11 @@ namespace AmonicAirLines
                 {
                     officeId = selectedOffice.Id; // Получение Id офиса
                 }
+            }
+            else
+            {
+                MessageBox.Show("не выбран офис");
+                return;
             }
             string birthdate = BirthdateTextBox.Text;
             DateTime parsedDate;
@@ -67,6 +86,11 @@ namespace AmonicAirLines
                 return;
             }
             string password = PasswordTextBox.Text;
+            if (lastName == null || lastName.Length == 0)
+            {
+                MessageBox.Show("введите пароль");
+                return;
+            }
             string hashedPassword = "";
             using (MD5 md5 = MD5.Create())
             {

@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Security.Cryptography;
+using AmonicAirLines.page;
+using System.Diagnostics;
 
 namespace AmonicAirLines
 {
@@ -30,110 +32,23 @@ namespace AmonicAirLines
         public MainWindow()
         {
             InitializeComponent();
+            if (Debugger.IsAttached)
+            {
+                mainFrame.Navigate(new page.Debug());
+            }
+            else
+            {
+                mainFrame.Navigate(new page.StartPage());
+            }
+
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string username = Username.Text;
-            string password = Password.Text;
+        
 
-            if (lockedUsers.ContainsKey(username) && lockedUsers[username] > DateTime.Now)
-            {
-                // Пользователь заблокирован, показать сообщение о времени ожидания
-                TimeSpan remainingTime = lockedUsers[username] - DateTime.Now;
-                MessageBox.Show($"Пользователь заблокирован. Повторите попытку через {remainingTime.TotalSeconds} секунд.");
-                return;
-            }
-
-            string responseBody = "False";
-
-            string hashedPassword = "";
-            using (MD5 md5 = MD5.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(password);
-                byte[] hash = md5.ComputeHash(bytes);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    sb.Append(hash[i].ToString("x2"));
-                }
-                hashedPassword = sb.ToString();
-            }
-            Console.WriteLine(hashedPassword);
-
-            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/CheckUsers?login={username}&password={hashedPassword}";
-            
-            HttpClient client = new HttpClient();
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-                if (response.IsSuccessStatusCode)
-                {
-                    responseBody = await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при выполнении запроса: {ex.Message}");
-            }
-
-            if (responseBody == "user")
-            {
-                loginAttempts[username] = 0;
-                if (lockedUsers.ContainsKey(username))
-                {
-                    lockedUsers.Remove(username);
-                }
-                UserWindow window = new UserWindow();
-                this.Hide();
-                window.ShowDialog();
-                this.Show();
-                
-            }
-            if (responseBody == "admin")
-            {
-                loginAttempts[username] = 0;
-                if (lockedUsers.ContainsKey(username))
-                {
-                    lockedUsers.Remove(username);
-                }
-                AdminWindow window = new AdminWindow();
-                this.Hide();
-                window.ShowDialog();
-                this.Show();
-                
-            }
-            else if (responseBody == "block")
-            {
-                MessageBox.Show("Вы заблокированы!");
-            }
-            else if (responseBody == "false")
-            {
-                if (!loginAttempts.ContainsKey(username))
-                {
-                    loginAttempts[username] = 0;
-                }
-                loginAttempts[username]++;
-                if (loginAttempts[username] >= 3)
-                {
-                    lockedUsers[username] = DateTime.Now.AddSeconds(10);
-                    MessageBox.Show("Превышен лимит попыток входа. Пользователь заблокирован на 10 секунд.");
-                    return;
-                }
-                MessageBox.Show("Неправильное имя пользователя или пароль.");
-            }
-            else if (responseBody == "error")
-            {
-                MessageBox.Show("Ошибка входа");
-            }
-        }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -160,20 +75,6 @@ namespace AmonicAirLines
             AppControle.saveObj();
         }
 
-        private void b1_Click(object sender, RoutedEventArgs e)
-        {
-            Window window = new AddUser();
-            Hide();
-            window.ShowDialog();
-            Show();
-        }
 
-        private void b2_Click(object sender, RoutedEventArgs e)
-        {
-            Window window = new EditRole();
-            Hide();
-            window.ShowDialog();
-            Show();
-        }
     }
 }

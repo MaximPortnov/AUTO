@@ -12,82 +12,38 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AmonicAirLines.Classes;
 
-namespace AmonicAirLines
+namespace AmonicAirLines.page
 {
-
-    public class User
-    {
-        public int Id { get; set; }
-        public int RoleId { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int OfficeId { get; set; }
-        public DateTime Birthdate { get; set; }
-        public bool Active { get; set; }
-        public object Office { get; set; }
-        public object Role { get; set; }
-    }
-
-    public class AnotherUser
-    {
-        public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Age { get; set; }
-        public string UserRole { get; set; }
-        public string EmailAddress { get; set; }
-        public string Office { get; set; }
-        public string HiddenData {  get; set; }
-        public AnotherUser(User user, string Title)
-        {
-            Id = user.Id;
-            int age = DateTime.Now.Year - user.Birthdate.Year;
-            FirstName = user.FirstName;
-            LastName = user.LastName;
-            Age = age;
-            UserRole = user.RoleId == 1 ? "Admin" : "User";
-            EmailAddress = user.Email;
-            Office = Title;
-            if (user.Active)
-            {
-                HiddenData = "0";
-            } else
-            {
-                HiddenData = "1";
-            }
-        }
-        public override string ToString()
-        {
-            return $"FirstName: {FirstName}, Last Name: {LastName}, Age: {Age}, User Role: {UserRole}, Email: {EmailAddress}, Office: {Office}";
-        }
-    }
-
+    
     /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
+    /// Логика взаимодействия для AdminMainPage.xaml
     /// </summary>
-    public partial class AdminWindow : Window
+    public partial class AdminMainPage : Page
     {
         List<Office> OfficeList = new List<Office>();
-        public AdminWindow()
+
+        public AdminMainPage()
         {
             InitializeComponent();
             foo();
+
         }
         async public void foo()
         {
             await LoadOfficesAsync();
             await fillComboBox();
         }
+
         private async Task<int> LoadOfficesAsync()
         {
             OfficeList = await Office.GetOffices();
 
             OfficeComboBox.ItemsSource = OfficeList;
-            OfficeComboBox.DisplayMemberPath = "Title"; 
+            OfficeComboBox.DisplayMemberPath = "Title";
 
             OfficeComboBox.SelectedValuePath = "Id";
             return 1;
@@ -95,7 +51,7 @@ namespace AmonicAirLines
 
         async public Task<int> fillComboBox()
         {
-            
+
             int officeId = -1;
             if (OfficeComboBox.SelectedItem != null)
             {
@@ -138,55 +94,58 @@ namespace AmonicAirLines
 
         private void OfficeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            fillComboBox();
+            _ = fillComboBox();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+            AddUser window = new AddUser();
+            window.ShowDialog();
+            _ = fillComboBox();
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnClearOffice_Click(object sender, RoutedEventArgs e)
         {
             if (OfficeComboBox.SelectedItem == null)
             {
-                fillComboBox();
+                _ = fillComboBox();
             }
             OfficeComboBox.SelectedItem = null;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            AddUser window = new AddUser();
-            Hide();
-            window.ShowDialog();
-            Show();
-            fillComboBox();
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void btnChangeRole_Click(object sender, RoutedEventArgs e)
         {
             AnotherUser user;
             if (dataGrid.SelectedItem != null)
             {
                 user = dataGrid.SelectedItem as AnotherUser;
-            } else
+            }
+            else
             {
                 MessageBox.Show("Choose");
                 return;
             }
-            
+
             EditRole editRole = new EditRole();
             editRole.anotherUser = user;
 
-            Hide();
+            //Hide();
             editRole.ShowDialog();
-            Show();
-            fillComboBox();
-            
+            //Show();
+            _ = fillComboBox();
         }
 
-        async private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void btnEnDisLogin_Click(object sender, RoutedEventArgs e)
         {
             int userId = -1;
             if (dataGrid.SelectedItem != null)
@@ -195,36 +154,44 @@ namespace AmonicAirLines
                 {
                     userId = user.Id;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Choose");
                 return;
             }
-            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/UserSwitch?userId={userId}";
-
-            using (HttpClient client = new HttpClient())
+            if (dataGrid.SelectedItems.Count > 1)
             {
-                try
+                MessageBox.Show("выберите одного юзера");
+                return;
+            }
+            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/UserSwitch?userId={userId}";
+            Task.Run(async () =>
+            {
+                using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.PutAsync(apiUrl, null);
-
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        Console.WriteLine("Успешно выполнен запрос.");
+                        HttpResponseMessage response = await client.PutAsync(apiUrl, null);
+                        if (response.IsSuccessStatusCode)
+                        {
+                            Console.WriteLine("Успешно выполнен запрос.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Запрос завершился с ошибкой: " + response.StatusCode);
+                            return;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Запрос завершился с ошибкой: " + response.StatusCode);
+                        Console.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
                         return;
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Ошибка при выполнении запроса: " + ex.Message);
-                    return;
-                }
-            }
-            fillComboBox();
+            }).Wait();
+            _ = fillComboBox();
         }
+
     }
 }

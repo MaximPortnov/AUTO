@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using AmonicAirLines.Classes;
 
 namespace AmonicAirLines
 {
@@ -61,8 +62,23 @@ namespace AmonicAirLines
         async private void Applybtn_Click(object sender, RoutedEventArgs e)
         {
             string emailAddress = EmailTextBox.Text;
+            if (emailAddress == null || emailAddress.Length == 0)
+            {
+                MessageBox.Show("нет почты");
+                return;
+            }
             string firstName = FirstNameTextBox.Text;
+            if (firstName == null || firstName.Length == 0)
+            {
+                MessageBox.Show("нет имени юзера");
+                return;
+            }
             string lastName = LastNameTextBox.Text;
+            if (lastName == null || lastName.Length == 0)
+            {
+                MessageBox.Show("нет фамилии юзера");
+                return;
+            }
             int officeId = 0;
             if (OfficeComboBox.SelectedItem != null)
             {

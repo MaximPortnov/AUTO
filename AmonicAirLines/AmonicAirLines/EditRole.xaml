@@ -5,20 +5,72 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmonicAirLines"
         mc:Ignorable="d"
-        Title="Edit Role" Height="315" Width="345">
-    <Grid>
-        <Label Name="Email" Content="Email address" HorizontalAlignment="Left" Margin="26,18,0,0" VerticalAlignment="Top"/>
-        <Label Content="First name" HorizontalAlignment="Left" Margin="27,58,0,0" VerticalAlignment="Top"/>
-        <Label Content="Last name" HorizontalAlignment="Left" Margin="29,102,0,0" VerticalAlignment="Top"/>
-        <Label Content="Office" HorizontalAlignment="Left" Margin="29,143,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="OfficeComboBox" HorizontalAlignment="Left" Margin="149,145,0,0" VerticalAlignment="Top" Width="153"/>
-        <Button Name ="Applybtn" Content="Apply" HorizontalAlignment="Left" Margin="59,266,0,0" VerticalAlignment="Top" Width="57" Click="Applybtn_Click"/>
-        <Button Name="Cancelbtn1" Content="Cancel" HorizontalAlignment="Left" Margin="196,266,0,0" VerticalAlignment="Top" Width="59" Click="Cancelbtn1_Click"/>
-        <TextBox Name="EmailTextBox" HorizontalAlignment="Left" Margin="149,22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
-        <TextBox Name="FirstNameTextBox" HorizontalAlignment="Left" Margin="149,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
-        <TextBox Name="LastNameTextBox" HorizontalAlignment="Left" Margin="149,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="153"/>
-        <Label Content="Role" HorizontalAlignment="Left" Margin="34,193,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="UserRadioButton" Content="User" HorizontalAlignment="Left" Margin="149,199,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="AdminRadioButton" Content="Administrator" HorizontalAlignment="Left" Margin="149,224,0,0" VerticalAlignment="Top"/>
+        MinHeight="280"
+        MinWidth="350"
+        MaxHeight="280"
+        MaxWidth="350"
+        Title="Edit Role">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Orientation="Vertical">
+            <Grid HorizontalAlignment="Center" Width="300" Height="25" VerticalAlignment="top" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Name="Email" Content="Email address" />
+                <TextBox Grid.Column="2" Name="EmailTextBox" TextWrapping="Wrap"/>
+            </Grid>
+            <Grid HorizontalAlignment="Center" Width="300" Height="25" VerticalAlignment="top" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="First name" />
+                <TextBox Grid.Column="2" Name="LastNameTextBox" TextWrapping="Wrap"/>
+            </Grid>
+            <Grid HorizontalAlignment="Center" Width="300" Height="25" VerticalAlignment="top" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Last name"/>
+                <TextBox Grid.Column="2" Name="FirstNameTextBox" TextWrapping="Wrap" />
+            </Grid>
+            <Grid HorizontalAlignment="Center" Width="300" Height="25" VerticalAlignment="top" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Office" />
+                <ComboBox Grid.Column="2" Name="OfficeComboBox" />
+            </Grid>
+            <Grid HorizontalAlignment="Center" Width="300" Height="35" VerticalAlignment="top" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="170"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Role" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                    <RadioButton Name="UserRadioButton" Content="User"/>
+                    <RadioButton Name="AdminRadioButton" Content="Administrator"/>
+                    
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid HorizontalAlignment="Center" Width="250" Height="25" VerticalAlignment="top" Margin="0,200,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Name ="Applybtn" Content="Apply" Click="Applybtn_Click"/>
+            <Button Grid.Column="2" Name="Cancelbtn1" Content="Cancel" Click="Cancelbtn1_Click"/>
+        </Grid>
+        
     </Grid>
 </Window>

@@ -5,14 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AmonicAirLines"
         mc:Ignorable="d"
+        MinHeight="210"
+        MinWidth="300"
         Title="Crash Description" Height="200" Width="300">
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
-            <TextBox x:Name="CrashDescriptionTextBox" TextWrapping="Wrap" Height="100" Width="250" Margin="0,0,0,10" />
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="System" Width="100" Margin="5" Click="SystemButton_Click"/>
-                <Button Content="Software" Width="100" Margin="5" Click="SoftwareButton_Click"/>
-            </StackPanel>
-        </StackPanel>
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" x:Name="CrashDescriptionTextBox" TextWrapping="Wrap" Margin="0,0,0,10" />
+            <Grid Grid.Row="2" HorizontalAlignment="Center" Height="25">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="System" Click="SystemButton_Click"/>
+                <Button Grid.Column="2" Content="Software" Click="SoftwareButton_Click"/>
+            </Grid>
+            
+        </Grid>
     </Grid> 
 </Window>

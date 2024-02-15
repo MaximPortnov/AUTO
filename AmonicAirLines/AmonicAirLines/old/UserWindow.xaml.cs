@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using Path = System.IO.Path;
 
-namespace AmonicAirLines
+namespace AmonicAirLines.old
 {
     public class DataItem
     {
