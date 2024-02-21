@@ -10,6 +10,9 @@
       Title="Debug">
 
     <Grid x:Name="mainGrid">
-        <Button Content="StartPage" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="StartPage" HorizontalAlignment="Left" Margin="26,21,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="SearchForFlights" HorizontalAlignment="Left" Margin="26,59,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+        <Button Content="BookingConfirmation" HorizontalAlignment="Left" Margin="26,84,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <Button Content="BookingConfirmation" HorizontalAlignment="Left" Margin="26,109,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
     </Grid>
 </Page>

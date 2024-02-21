@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
-        MinWidth="600" MinHeight="450"
+        SizeChanged="Window_SizeChanged"
+        MinWidth="750" MinHeight="450"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Frame x:Name="mainFrame" NavigationUIVisibility="Hidden"/>

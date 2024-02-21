@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\portm\Repos\AUTO\AmonicAirLines\AmonicAirLines\App.xaml
-8-180053036
+14-1316546231
 
-16506729702
+28-750486930
 149382290839
-AddUser.xaml;CrashDialogWindow.xaml;EditRole.xaml;MainWindow.xaml;page\AdminMainPage.xaml;page\Debug.xaml;page\StartPage.xaml;page\UserMainPage.xaml;
+AddUser.xaml;BilingConfirmation.xaml;CrashDialogWindow.xaml;EditRole.xaml;MainWindow.xaml;page\AdminMainPage.xaml;page\BookingConfirmation.xaml;page\Debug.xaml;page\ManageFlightSchedulesPage.xaml;page\SearchForFlights.xaml;page\StartPage.xaml;page\UserMainPage.xaml;EditFlight.xaml;ScheduleChanges.xaml;
 
 False
 

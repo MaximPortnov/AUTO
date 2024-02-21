@@ -1,0 +1,30 @@
+﻿<Window x:Class="AmonicAirLines.ScheduleChanges"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AmonicAirLines"
+        mc:Ignorable="d"
+        MinHeight="235"
+        MinWidth="365"
+        Title="ScheduleChanges" Height="220" Width="345">
+    <Grid>
+        <Label Content="Please select the text file with the changes"  Margin="10,10,10,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PathTextBox" Margin="10,36,90,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <Button Content="Improt" HorizontalAlignment="Right" Margin="0,35,10,0" VerticalAlignment="Top" Width="65" Click="Button_Click"/>
+        <GroupBox Header="Flight route" Margin="10,65,10,10">
+            <StackPanel Orientation="Vertical" Height="auto">
+                <StackPanel Orientation="Horizontal" Height="37">
+                    <Label Name="sucLB" Content="Successful Changes Applied:" Height="29"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="37">
+                    <Label Name="dupLB" Content="Duplicate Records Discarded:" Height="29"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="37">
+                    <Label Name="misLB" Content="Record with missing flieds discarded:" Height="29"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Window>

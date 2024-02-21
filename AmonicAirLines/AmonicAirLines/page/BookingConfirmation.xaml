@@ -1,0 +1,146 @@
+﻿<Page x:Class="AmonicAirLines.page.BookingConfirmation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AmonicAirLines.page"
+      mc:Ignorable="d" 
+      Background="White"
+      d:DesignHeight="700" d:DesignWidth="800"
+      Title="BookingConfirmation">
+
+    <Grid>
+        <Grid Margin="10,10,10,10" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="130"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Outbound flight details"  >
+                <StackPanel Orientation="Horizontal" Height="34">
+                    <Label Content="From:" Width="97"/>
+                    <Label Content="To:" Width="74"/>
+                    <Label Content="Cabin Type:" Width="142"/>
+                    <Label Content="Date:" Width="118"/>
+                    <Label Content="Flight number:" Width="127"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="Return flight details" >
+                <StackPanel Orientation="Horizontal" Height="34">
+                    <Label Content="From:" Width="97"/>
+                    <Label Content="To:" Width="74"/>
+                    <Label Content="Cabin Type:" Width="142"/>
+                    <Label Content="Date:" Width="118"/>
+                    <Label Content="Flight number:" Width="127"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="2" Header="Passenger details" >
+                <StackPanel Orientation="Vertical" Height="129">
+
+                    <Grid Height="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Firstname" Height="29"/>
+                            <TextBox Grid.Column="1" Height="18"/>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Lastname" Height="28"/>
+                            <TextBox Grid.Column="1" Height="18"/>
+                        </Grid>
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Birthdate" Height="28"/>
+                            <TextBox Grid.Column="1" Name="BirthdateBox" Height="18" PreviewTextInput="OutboundTextBox_PreviewTextInput" TextChanged="OutboundTextBox_TextChanged"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Height="43" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Passport number;" Height="29"/>
+                            <TextBox Grid.Column="1" Height="18"/>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Passport country" Height="28"/>
+                            <ComboBox Grid.Column="1" Name="CountryBox" Height="18"/>
+                        </Grid>
+                        <Grid Grid.Column="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="125"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Phone" Height="25"/>
+                            <TextBox Grid.Column="1" Name="PhoneTextBox" Height="18"/>
+                        </Grid>
+                    </Grid>
+                    <Button Content="Add passenger" Height="20" Width="108" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </GroupBox>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="Passenger list" />
+                <DataGrid  Grid.Row="1"
+                    x:Name="dataGrid1" AutoGenerateColumns="False" 
+                    ColumnWidth="*" CanUserAddRows="False">
+                    <DataGrid.Columns >
+                        <DataGridTextColumn Header="From"  Width="50" Binding="{Binding From}"/>
+                        <DataGridTextColumn Header="To"  Width="50" Binding="{Binding To}"/>
+                        <DataGridTextColumn Header="Date"  Width="110" Binding="{Binding Date}"/>
+                        <DataGridTextColumn Header="Time"  Width="50" Binding="{Binding Time}"/>
+                        <DataGridTextColumn Header="Flight Number(s)"  Width="130" Binding="{Binding FlightNumbers}"/>
+                        <DataGridTextColumn Header="Cabin price" Width="100" Binding="{Binding CabinPrice}" />
+                        <DataGridTextColumn Header="Number of stops"  Width="*" Binding="{Binding NumberOfStops}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Row="2"  Content="Remove passenger" HorizontalAlignment="Right" Margin="2" Width="111"/>
+
+            </Grid>
+            <Grid Grid.Row="4" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Back to search for flights" />
+                <Button Grid.Column="2" Content="Confirm booking" />
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,46 @@
+﻿<Window x:Class="AmonicAirLines.BilingConfirmation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AmonicAirLines"
+        mc:Ignorable="d"
+        MinHeight="180"
+        MinWidth="210"
+        Title="BilingConfirmation" Height="180" Width="210">
+    <Grid>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="Total amount:" HorizontalAlignment="Left"/>
+            <Label Grid.Row="1" Content="Paid using:" HorizontalAlignment="Left" />
+            <Grid Grid.Row="2" Margin="30,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="15"/>
+                </Grid.RowDefinitions>
+                <RadioButton Grid.Row="0" Content="Credit Card" HorizontalAlignment="Left" />
+                <RadioButton Grid.Row="2" Content="Cash" HorizontalAlignment="Left" />
+                <RadioButton Grid.Row="4" Content="Voucher" HorizontalAlignment="Left"/>
+            </Grid>
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Cancel" Grid.Column="0"/>
+                <Button Content="Issue tickets" Grid.Column="2"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

@@ -193,5 +193,14 @@ namespace AmonicAirLines.page
             _ = fillComboBox();
         }
 
+        private void ManageFligght_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ManageFlightSchedulesPage());
+        }
+
+        private void SearchForFlights_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SearchForFlights());
+        }
     }
 }

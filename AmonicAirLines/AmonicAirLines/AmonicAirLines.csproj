@@ -185,8 +185,17 @@
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BilingConfirmation.xaml.cs">
+      <DependentUpon>BilingConfirmation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Airports.cs" />
     <Compile Include="Classes\AnotherUser.cs" />
     <Compile Include="AppControle.cs" />
+    <Compile Include="Classes\BookingFlight.cs" />
+    <Compile Include="Classes\Cabins.cs" />
+    <Compile Include="Classes\Country.cs" />
+    <Compile Include="Classes\Flight.cs" />
+    <Compile Include="Classes\FlightSearch.cs" />
     <Compile Include="CrashDialogWindow.xaml.cs">
       <DependentUpon>CrashDialogWindow.xaml</DependentUpon>
     </Compile>
@@ -197,8 +206,17 @@
     <Compile Include="page\AdminMainPage.xaml.cs">
       <DependentUpon>AdminMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="page\BookingConfirmation.xaml.cs">
+      <DependentUpon>BookingConfirmation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="page\Debug.xaml.cs">
       <DependentUpon>Debug.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\ManageFlightSchedulesPage.xaml.cs">
+      <DependentUpon>ManageFlightSchedulesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="page\SearchForFlights.xaml.cs">
+      <DependentUpon>SearchForFlights.xaml</DependentUpon>
     </Compile>
     <Compile Include="page\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -207,7 +225,17 @@
       <DependentUpon>UserMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\User.cs" />
+    <Compile Include="EditFlight.xaml.cs">
+      <DependentUpon>EditFlight.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ScheduleChanges.xaml.cs">
+      <DependentUpon>ScheduleChanges.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BilingConfirmation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -235,7 +263,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="page\BookingConfirmation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="page\Debug.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\ManageFlightSchedulesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="page\SearchForFlights.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +284,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="page\UserMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EditFlight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ScheduleChanges.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -278,10 +326,7 @@
   <ItemGroup>
     <Resource Include="Resources\LoginLogo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="old\" />
-    <Folder Include="Window\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
