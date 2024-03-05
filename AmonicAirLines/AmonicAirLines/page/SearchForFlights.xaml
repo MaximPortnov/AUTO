@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:AmonicAirLines.page"
       mc:Ignorable="d" 
       Background="White"
+      KeyDown="OnKeyDown"
       d:DesignHeight="700" d:DesignWidth="800"
       Title="SearchForFlights">
-
+        
     <Grid>
         <GroupBox Header="Filter by" Margin="15,15,15,0" Height="112" VerticalAlignment="Top">
             <Grid>
@@ -47,8 +48,8 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel HorizontalAlignment="left" Orientation="Horizontal">
-                        <RadioButton x:Name="returnRadioButton" Content="Return" Height="18" Margin="0,0,15,0"  IsChecked="True"/>
-                        <RadioButton x:Name="oneWayRadioButton" Content="One way" Height="18" />
+                        <RadioButton x:Name="returnRadioButton" Content="Return" Height="18" Margin="0,0,15,0" IsChecked="True"/>
+                        <RadioButton x:Name="oneWayRadioButton" Content="One way" Height="18"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" HorizontalAlignment="Left" Orientation="Horizontal">
@@ -82,7 +83,7 @@
                 <CheckBox Name="ThreeDays1CheckBox" Content="Display three days before and after" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             </Grid>
             <DataGrid 
-                x:Name="dataGrid" AutoGenerateColumns="False" 
+                x:Name="outDataGrid" AutoGenerateColumns="False" 
                 Grid.Row="1" ColumnWidth="*" 
                 CanUserAddRows="False" >
                 <DataGrid.Columns >
@@ -97,15 +98,15 @@
             </DataGrid>
             <Grid Grid.Row="2" x:Name="GridRow2">
                 <Label Content="Return flight details:" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <CheckBox Content="Display three days before and after" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <CheckBox Name="ThreeDays2CheckBox" Content="Display three days before and after" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
             </Grid>
-            <DataGrid Grid.Row="3" x:Name="dataGrid1" AutoGenerateColumns="False" ColumnWidth="*" 
+            <DataGrid Grid.Row="3" x:Name="retDataGrid" AutoGenerateColumns="False" ColumnWidth="*" 
                 CanUserAddRows="False">
                 <DataGrid.Columns >
                     <DataGridTextColumn Header="From"  Width="50" Binding="{Binding From}"/>
                     <DataGridTextColumn Header="To"  Width="50" Binding="{Binding To}"/>
-                    <DataGridTextColumn Header="Date"  Width="110" Binding="{Binding Date}"/>
+                    <DataGridTextColumn Header="Date"  Width="110" Binding="{Binding Date, StringFormat='yyyy-MM-dd'}"/>
                     <DataGridTextColumn Header="Time"  Width="50" Binding="{Binding Time}"/>
                     <DataGridTextColumn Header="Flight Number(s)"  Width="130" Binding="{Binding FlightNumbers}"/>
                     <DataGridTextColumn Header="Cabin price" Width="100" Binding="{Binding CabinPrice}" />
@@ -129,9 +130,9 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="5"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="1" MaxLength="3" />
+                    <TextBox Name="PassengersTextBox" Grid.Column="1" MaxLength="3" />
                     <Label Grid.Column="2" Content="Passengers"/>
-                    <Button Grid.Column="3" Content="Bookflight"/>
+                    <Button Grid.Column="3" Content="Bookflight" Click="Button_Click_2"/>
                 </Grid>
             </GroupBox>
             <Button Grid.Column="2" Content="Exit" Height="25" HorizontalAlignment="Right" Margin="0,22,0,22" Width="45" Click="Button_Click_1"/>

@@ -13,12 +13,12 @@
         <Grid Margin="10,10,10,10" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="60" Name="heightReturnGB"/>
                 <RowDefinition Height="130"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
-            <GroupBox Grid.Row="0" Header="Outbound flight details"  >
+            <GroupBox Grid.Row="0" Header="Outbound flight details">
                 <StackPanel Orientation="Horizontal" Height="34">
                     <Label Content="From:" Width="97"/>
                     <Label Content="To:" Width="74"/>
@@ -27,7 +27,7 @@
                     <Label Content="Flight number:" Width="127"/>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Grid.Row="1" Header="Return flight details" >
+            <GroupBox Grid.Row="1" Name="" Header="Return flight details">
                 <StackPanel Orientation="Horizontal" Height="34">
                     <Label Content="From:" Width="97"/>
                     <Label Content="To:" Width="74"/>
@@ -137,7 +137,7 @@
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Back to search for flights" />
+                <Button Grid.Column="0" Content="Back to search for flights" Click="Button_Click" />
                 <Button Grid.Column="2" Content="Confirm booking" />
 
             </Grid>

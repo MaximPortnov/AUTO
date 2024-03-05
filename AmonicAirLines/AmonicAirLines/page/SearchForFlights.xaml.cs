@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,6 +38,11 @@ namespace AmonicAirLines.page
         }
         List<Airports> AirportList = new List<Airports>();
         List<Cabins> CabinList = new List<Cabins>();
+        List<FlightSearch> outFlightSearch;
+        List<FlightForBooking> outFlightForBookings;
+        List<FlightSearch> retFlightSearch;
+        List<FlightForBooking> retFlightForBookings;
+
         public SearchForFlights()
         {
             InitializeComponent();
@@ -44,6 +50,21 @@ namespace AmonicAirLines.page
 
             returnRadioButton.Checked += returnRadioButton_Checked;
             oneWayRadioButton.Checked += oneWayRadioButton_Checked;
+        }
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            Console.WriteLine(e.Key.ToString());
+            if (e.Key == Key.D && Keyboard.Modifiers == ModifierKeys.Control)
+            {
+                FromBox.SelectedIndex = 2;
+                ToBox.SelectedIndex = 1;
+                CabinBox.SelectedIndex = 0;
+                OutboundTextBox.Text = "12/12/2017";
+                returnTextBox.Text = "20/12/2017";
+                ThreeDays1CheckBox.IsChecked = true;
+                ThreeDays2CheckBox.IsChecked = true;
+                Button_Click(sender, e);
+            }
         }
         async public void foo()
         {
@@ -75,8 +96,71 @@ namespace AmonicAirLines.page
         {
 
         }
+        async private Task<string> f1(string apiUrl)
+        {
+            Console.WriteLine(apiUrl);
+            string responseBody = "";
+            HttpClient client = new HttpClient();
+            try
+            {
+                
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+                if (response.IsSuccessStatusCode)
+                {
+                    responseBody = await response.Content.ReadAsStringAsync();
+                }
+                else { }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка при выполнении запроса: {ex.Message}");
+            }
+            return responseBody;
+        }
+        private void fillDataGrid(int from, int to, DateTime dateTime, bool threeDays,ref List<FlightSearch> flightSearch,ref List<FlightForBooking> flightForBookings, ref DataGrid dataGrid1)
+        {
+            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/test?fromIata={AirportList[from].Iatacode}&toIata={AirportList[to].Iatacode}&date={dateTime.ToString("yyyy-MM-dd")}&threeDays={threeDays.ToString().ToLower()}";
+            string responseBody = "";
+            Task.Run( async () =>
+            {
+                responseBody = await f1(apiUrl);
+            }).Wait();
+            flightSearch = JsonConvert.DeserializeObject<List<FlightSearch>>(responseBody);
+            flightForBookings = new List<FlightForBooking>();
+            double coef = 1;
+            if (CabinBox.SelectedIndex == 2)
+            {
+                coef = 1.35;
+            }
+            else if (CabinBox.SelectedIndex == 3)
+            {
+                coef = 1.35 * 1.30;
+            }
 
-        async private void Button_Click(object sender, RoutedEventArgs e)
+            foreach (var i in flightSearch)
+            {
+                foreach (var j in i.FlightIds)
+                {
+                    Console.Write(j + " ");
+                }
+                Console.WriteLine();
+                var temp = new FlightForBooking
+                {
+                    Ids = i.FlightIds,
+                    From = AirportList[from].Iatacode,
+                    To = AirportList[to].Iatacode,
+                    Date = i.Dates[0],
+                    Time = TimeSpan.Parse(i.Times[0]),
+                    FlightNumbers = i.FlightNumbers.Replace(", ", " - "),
+                    CabinPrice = (decimal)Math.Round(((double)(i.TotalCost)) * coef, 0),
+                    NumberOfStops = i.Transfers - 1
+                };
+                flightForBookings.Add(temp);
+            }
+            dataGrid1.ItemsSource = flightForBookings;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (FromBox.SelectedIndex <0 || ToBox.SelectedIndex <0)
             {
@@ -89,7 +173,8 @@ namespace AmonicAirLines.page
             bool ret = returnRadioButton.IsChecked == true;
             DateTime outDateTime;
             DateTime retDateTime;
-            bool d = ThreeDays1CheckBox.IsChecked == true;
+            bool outThreeDays = ThreeDays1CheckBox.IsChecked == true;
+            bool retThreeDays = ThreeDays2CheckBox.IsChecked == true;
             bool s;
             s = DateTime.TryParseExact(OutboundTextBox.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out outDateTime);
             if (!s)
@@ -97,6 +182,7 @@ namespace AmonicAirLines.page
                 MessageBox.Show("не все параметры выставлены");
                 return;
             }
+            fillDataGrid(from, to, outDateTime, outThreeDays, ref outFlightSearch, ref outFlightForBookings, ref outDataGrid);
             if (ret)
             {
                 s = DateTime.TryParseExact(returnTextBox.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out retDateTime);
@@ -105,74 +191,28 @@ namespace AmonicAirLines.page
                     MessageBox.Show("не все параметры выставлены");
                     return;
                 }
+                fillDataGrid(to, from, retDateTime, retThreeDays, ref retFlightSearch, ref retFlightForBookings, ref retDataGrid);
             }
             // https://localhost:7139/test?fromIata={from}&toIata={to}&date={outDateTime}
-            string apiUrl = $"{App.PROTOCOL}://localhost:{App.PORT}/test?fromIata={AirportList[from].Iatacode}&toIata={AirportList[to].Iatacode}&date={outDateTime.ToString("yyyy-MM-dd")}&threeDays={d.ToString().ToLower()}";
-            Console.WriteLine(apiUrl);
-            string responseBody = "";
-            HttpClient client = new HttpClient();
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(apiUrl);
-                if (response.IsSuccessStatusCode)
-                {
-                    responseBody = await response.Content.ReadAsStringAsync();
-                }
-                else
-                {
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при выполнении запроса: {ex.Message}");
-            }
-
-            List<FlightSearch> users = JsonConvert.DeserializeObject<List<FlightSearch>>(responseBody);
-            List<FlightForBooking> flightForBookings = new List<FlightForBooking>();
-            double coef = 1;
-            if (CabinBox.SelectedIndex == 2)
-            {
-                coef = 1.35;
-            } else if (CabinBox.SelectedIndex == 3)
-            {
-                coef = 1.35 * 1.30;
-            }
-
-            foreach (var i in users)
-            {
-                    Console.WriteLine(i.Times[0]);
-                var temp = new FlightForBooking
-                {
-                    Ids = i.FlightIds,
-                    From = AirportList[from].Iatacode,
-                    To = AirportList[to].Iatacode,
-                    Date = i.Dates[0],
-                    Time = TimeSpan.Parse(i.Times[0]),
-                    FlightNumbers = i.FlightNumbers.Replace(", ", " - "),
-                    CabinPrice = (decimal)Math.Round(((double)(i.TotalCost)) * coef, 0),
-                    NumberOfStops = i.Transfers-1
-                };
-                flightForBookings.Add(temp);
-            }
-            dataGrid.ItemsSource = flightForBookings;
-
-
         }
 
         private void oneWayRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             GridRow2.Visibility = Visibility.Collapsed;
-            dataGrid1.Visibility = Visibility.Collapsed;
+            retDataGrid.Visibility = Visibility.Collapsed;
             rowDefinition2.Height = new GridLength(0);
             rowDefinition3.Height = new GridLength(0);
+            returnTextBox.IsEnabled = false;
+
         }
 
         private void returnRadioButton_Checked(object sender, RoutedEventArgs e)
         {
             GridRow2.Visibility = Visibility.Visible;
-            dataGrid1.Visibility = Visibility.Visible;
+            retDataGrid.Visibility = Visibility.Visible;
             rowDefinition2.Height = new GridLength(25);
             rowDefinition3.Height = new GridLength(1, GridUnitType.Star);
+            returnTextBox.IsEnabled = true;
         }
 
         private void date_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -233,6 +273,33 @@ namespace AmonicAirLines.page
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationService.GoBack();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            int passengers;
+            bool n = int.TryParse(PassengersTextBox.Text, out passengers);
+            if (!n)
+            {
+                MessageBox.Show("не правильно введенно колличество пасажиров");
+                return;
+            }
+            bool ret = returnRadioButton.IsChecked == true;
+            object outFlight = outDataGrid.SelectedItem;
+            object retFlight = retDataGrid.SelectedItem;
+            if (outFlight == null || (ret && retFlight == null))
+            {
+                MessageBox.Show("не выбран рейс");
+                return;
+            }
+            var t = new BookingConfirmation();
+            t.ret = ret;
+            t.outFlightSearch = outFlight as FlightSearch;
+            if (ret)
+            {
+                t.retFlightSearch = retFlight as FlightSearch;
+            }
+            NavigationService.Navigate(t);
         }
     }
 }

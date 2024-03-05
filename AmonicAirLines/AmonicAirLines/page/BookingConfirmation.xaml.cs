@@ -21,6 +21,10 @@ namespace AmonicAirLines.page
     /// </summary>
     public partial class BookingConfirmation : Page
     {
+        public bool ret;
+        public FlightSearch outFlightSearch;
+        public FlightSearch retFlightSearch;
+
         List<Country> CountryList = new List<Country>();
         public BookingConfirmation()
         {
@@ -97,5 +101,9 @@ namespace AmonicAirLines.page
             }
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
     }
 }

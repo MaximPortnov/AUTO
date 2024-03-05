@@ -26,11 +26,7 @@ namespace AmonicAirLines
             {
                 mainFrame.Navigate(new page.StartPage());
             }
-
         }
-
-        
-
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -48,8 +44,6 @@ namespace AmonicAirLines
                 crashDialogWindow.ShowDialog();
                 //MessageBoxResult res = MessageBox.Show("краш произошел из за системной ошибки?", "краш", MessageBoxButton.YesNo);
                 AppControle.obj.setReasonCrash(crashDialogWindow.Result == "System", crashDialogWindow.CrashDescription);
-
-
             }
             AppControle.obj.printSession();
 

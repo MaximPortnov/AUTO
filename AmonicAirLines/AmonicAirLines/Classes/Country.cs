@@ -24,7 +24,7 @@ namespace AmonicAirLines.Classes
             {
                 responseBody = response.Content.ReadAsStringAsync().Result;
                 List<Country> country = JsonConvert.DeserializeObject<List<Country>>(responseBody);
-                Console.WriteLine(responseBody);
+                //Console.WriteLine(responseBody);
                 return country;
             }
             else

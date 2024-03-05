@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AmonicAirLines.Classes
 {
-    internal class FlightSearch
+    public class FlightSearch
     {
         public List<DateTime> Dates { get; set; } = new List<DateTime>();
         public List<string> Times { get; set; } = new List<string>();
